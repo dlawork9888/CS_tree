@@ -1,0 +1,318 @@
+# CS Tree
+```
+KEYWORD TREE !
+```
+
+## 운영체제
+- 운영체제 역할
+    - CPU 스케줄링
+    - 메모리 관리
+    - 디스크 파일 관리
+    - I/O 디바이스 관리
+- 운영체제 구조
+    - 유저프로그램
+    - 인터페이스
+    - 시스템콜
+    - 커널
+    - 하드웨어
+- 컴퓨터 요소
+    -  CPU
+        - CU
+        - 레지스터
+        - ALU
+    - 메모리 컨트롤러
+        - RAM
+    - DMA 컨트롤러
+    - 타이머
+    - 디바이스 컨트롤러
+        - 로컬 버퍼
+            - 디바이스
+- 메모리
+    - 메모리 계층
+        - 레지스터
+        - 캐시
+            - 캐시 매핑
+                - 직접 매핑
+                - 연관 매핑
+                - 직접 연관 매핑
+        - 주기억장치/RAM
+        - 보조기억장치/HDD,SSD
+    - 메모리 관리
+        - MMU
+        - 가상 메모리
+            - 페이징
+                - 프레임
+                - 페이지 테이블
+                - TLB
+                - 내부 단편화
+            - 세그멘테이션
+                - 외부 단편화
+        - 관리 전략
+            - 반입 전략
+            - 배치 전략
+                - First Fit
+                - Best Fit 
+                - Worst Fit
+            - 교체 전략
+                - 페이지 교체 알고리즘
+                    - FIFO
+                    - LRU
+                    - NUR
+                    - LFU
+- 프로세스
+    - PCB
+        - 컨텍스트 스위칭
+    - 프로세스 메모리 구조
+        - 스택
+            - 지역변수
+            - 매개변수
+        - 힙
+            - 동적할당변수
+        - 데이터
+            - 전역변수
+        - 코드
+    - 프로세스 상태
+        - Ready
+        - Running
+        - Wait
+    - 프로세스 컴파일 과정
+        - C 기준 컴파일 과정
+            - .c
+            - 컴파일러
+                - assembly
+            - 어셈블러
+                - object file
+            - 링커
+                - 라이브러리
+                - .exe
+    - 멀티 프로세싱
+        - IPC
+            - 공유메모리
+            - 파일
+            - 소켓
+            - 익명 파이프
+            - 명명된 파이프
+            - 메시지 큐
+    - 공유자원
+        - 임계영역
+            - 뮤텍스
+            - 세마포어
+            - 모니터
+        - 교착상태
+            - 조건
+                - 상호배제
+                - 점유대기
+                - 비선점
+                - 환형대기
+            - 전략
+                - 예방
+                - 회피
+                - 발견
+                - 회복
+    - 스레드
+        - 멀티스레드
+- CPU 스케줄링 알고리즘
+    - 비선점 방식
+        - FCFS
+        - SJF
+        - 우선순위
+        - HRN
+    - 선점 방식
+        - Round-Robin 
+        - SRT
+        - 선점 우선순위
+        - 다단계 큐
+        - 다단계 피드백 큐
+
+## 네트워크
+- 네트워크 기초
+    - 처리량, 지연시간
+    - 네트워크 분류
+        - LAN
+        - MAN
+        - WAN
+    - 네트워크 토폴로지
+        - 트리
+        - 버스
+            - 스푸핑
+        - 성형
+        - 링형
+        - 메시
+        - 병목현상
+- OSI 7
+    - Application Layer
+        - L7 Switch
+    - Presentation Layer
+    - Session Layer
+    - Transport Layer
+    - Network Layer
+        - L3 Switch
+        - Router
+    - Data Link Layer
+        - L2 Switch
+        - Bridge
+    - Phsycal Layer
+        - NIC
+        - Repeater
+        - AP
+- TCP/IP 4
+    - Application Layer
+        - HTTP
+            - HTTP 1.0
+            - HTTP 1.1
+                - keep alive
+            - HTTP 2
+                - 멀티플렉싱
+                - 헤더 압축
+                - 서버 푸시
+            - HTTP 3
+                - UDP 기반
+                - QUIC + TLS1.3
+            - HTTPS
+                - SSL
+                - TLS
+        - FTP
+        - SMTP
+        - DNS
+        - SSH
+        - Web Socket
+        - MQTT
+    - Transport Layer
+        - TCP
+            - 3 way handshake
+            - 4 way handshake
+            - 가상 회선 패킷 교환
+        - UDP
+            - 데이터크램 패킷 교환
+        - QUIC
+    - Internet Layer
+        - IP
+            - IP 주소 체계
+                - 클래스 기반 할당 방식
+                - DHCP
+                - NAT
+            - IPv4
+            - IPv6
+            - 홉바이홉 통신
+                - 라우팅 테이블
+                - 게이트 웨이
+                - TTL
+        - ICMP
+        - ARP
+        - RARP
+    - Network Access Layer
+        - Ehternet
+            - 유선 LAN
+                - IEEE 802.3
+                    - 전이중화 통신
+                - CSMA/CD
+                    - 반이중화 통신
+            - 무선 LAN
+                - IEEE 802.11
+                    - 반이중화 통신
+                    - CSMA/CA
+    - 캡슐화/비캡슐화 과정
+        - Message
+        - Segment
+        - Packet
+        - Frame
+
+## 데이터베이스
+- 데이터베이스 기본
+    - 엔터티
+    - 릴레이션
+        - 튜플
+        - 릴레이션 스키마
+        - 릴레이션 인스턴스
+    - 테이블
+        - 레코드
+    - 속성
+        - 도메인
+    - 관계
+        - 1:1
+        - 1:N
+        - N:M
+    - 필드 타입
+        - 숫자형
+            - TINYINT
+            - SMALLINT
+            - MEDIUMINT
+            - INT
+            - BIGINT
+        - 날짜형
+            - DATE
+            - DATETIME
+            - TIMESTAMP
+        - 문자형
+            - CHAR
+            - VARCHAR
+        - TEXT
+        - BLOB
+        - ENUM
+        - SET
+    - 키
+        - 기본키
+            - 자연키
+            - 인조키
+        - 후보키
+        - 대체키
+        - 슈퍼키
+        - 외래키
+            - NULL 허용
+            - 중복 허용
+- ERD
+- 정규화
+    - 비정규형
+    - 제1정규형
+    - 제2정규형
+    - 제3정규형
+    - BCNF
+    - 제4정규형
+    - 제5정규형
+- 트랜잭션
+    - Atomicity
+    - Consistency
+    - Isolation
+    - Durability
+- 무결성
+    - 개체 무결성
+        - PRIMARY KEY
+    - 참조 무결성
+        - FOREIGN KEY
+    - 고유 무결성
+        - UNIQUE
+    - NULL 무결성
+        - NOT NULL
+- DB 종류
+    - 관계형DB
+    - NoSQL DB
+- 인덱스
+    - B-Tree
+        - 대수확장성
+    - 인덱스 최적화
+- JOIN
+    - JOIN 종류
+        - INNER
+        - OUTER
+            - FULL
+            - LEFT
+            - RIGHT
+        - NATURAL
+        - CROSS
+    - JOIN 원리
+        - 중첩 루프 조인
+        - 정렬 병합 조인
+        - 해시 조인
+
+## 자료구조
+- 선형 자료구조
+    - 배열
+    - 연결리스트
+    - 스택
+    - 큐
+- 비선형 자료구조
+    - 그래프
+    - 트리
+    - 힙
+    - 우선순위 큐
+    - 해시 테이블
