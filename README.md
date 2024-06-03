@@ -45,20 +45,31 @@ KEYWORD TREE !
                 - 페이지 테이블
                 - TLB
                 - 내부 단편화
+                - 페이지 크기
+                - Locality
+                    - Temporal Locality
+                    - Spatial Locality
+                - Working Set
+                - Thrashing
+                    - CPU 이용률, 다중 프로그래밍 정도
             - 세그멘테이션
                 - 외부 단편화
         - 관리 전략
             - 반입 전략
+                - 요구 반입
+                - 예상 반입
             - 배치 전략
                 - First Fit
                 - Best Fit 
                 - Worst Fit
             - 교체 전략
                 - 페이지 교체 알고리즘
+                    - OPT
                     - FIFO
                     - LRU
-                    - NUR
                     - LFU
+                    - NUR
+                    - SCR
 - 프로세스
     - PCB
         - 컨텍스트 스위칭
@@ -73,8 +84,13 @@ KEYWORD TREE !
         - 코드
     - 프로세스 상태
         - Ready
+            - Dispatch
         - Running
+            - 선점, 시간초과
+            - I/O 발생
         - Wait
+            - Wake Up
+        - Spooling
     - 프로세스 컴파일 과정
         - C 기준 컴파일 과정
             - .c
@@ -107,10 +123,14 @@ KEYWORD TREE !
             - 전략
                 - 예방
                 - 회피
+                    - 은행원 알고리즘
                 - 발견
                 - 회복
     - 스레드
         - 멀티스레드
+        - Concurrency
+        - 병렬성
+        - 스레드 풀
 - CPU 스케줄링 알고리즘
     - 비선점 방식
         - FCFS
@@ -123,6 +143,26 @@ KEYWORD TREE !
         - 선점 우선순위
         - 다단계 큐
         - 다단계 피드백 큐
+- 운영체제 종류
+    - Windows
+        - GUI
+        - 선점형 멀티태스킹
+        - PnP(Plug and Play)
+        - OLE(Object Linking and Embedding)
+        - Single User
+    - UNIX
+        - 다중 사용자, 다중 작업 지원
+        - 대부분 C기반, 이식성
+        - 트리 구조 파일 시스템
+        - 구성요소
+            - 커널
+            - 쉘
+            - 유틸리티 프로그램
+    - LINUX
+        - UNIX 기반
+        - Unix 완벽 호환
+    - MacOS
+        - UNIX 기반
 
 ## 네트워크
 - 네트워크 기초
@@ -145,15 +185,17 @@ KEYWORD TREE !
     - Presentation Layer
     - Session Layer
     - Transport Layer
+        - Gateway
     - Network Layer
         - L3 Switch
         - Router
     - Data Link Layer
         - L2 Switch
         - Bridge
-    - Phsycal Layer
+    - Physical Layer
         - NIC
         - Repeater
+        - Hub
         - AP
 - TCP/IP 4
     - Application Layer
@@ -191,8 +233,16 @@ KEYWORD TREE !
                 - 클래스 기반 할당 방식
                 - DHCP
                 - NAT
-            - IPv4
-            - IPv6
+                - IPv4
+                    - 8*4 = 32 bits
+                    - Unicast
+                    - Multicast
+                    - Broadcast
+                - IPv6
+                    - 16*8 = 128 bits
+                    - Unicast
+                    - Multicast
+                    - Anycast
             - 홉바이홉 통신
                 - 라우팅 테이블
                 - 게이트 웨이
@@ -211,12 +261,19 @@ KEYWORD TREE !
                 - IEEE 802.11
                     - 반이중화 통신
                     - CSMA/CA
-    - 캡슐화/비캡슐화 과정
-        - Message
-        - Segment
-        - Packet
-        - Frame
-
+- 캡슐화/비캡슐화 과정
+    - Message
+    - Segment
+    - Packet
+    - Frame
+- 경로 제어 프로토콜
+    - IGP (Interior Gateway Protocol)
+        - RIP
+            - Bellman-Ford 알고리즘
+        - OSPF
+            - Dijkstra 알고리즘
+    - EGP (Exterior Gateway Protocol)
+    - BGP (Border Gateway Protocol)
 ## 데이터베이스
 - 데이터베이스 기본
     - 엔터티
@@ -269,11 +326,20 @@ KEYWORD TREE !
     - BCNF
     - 제4정규형
     - 제5정규형
+- 반정규화
+    - 테이블 통합
+    - 테이블 분할
+    - 중복 테이블 추가
+    - 중복 속성 추가
 - 트랜잭션
-    - Atomicity
-    - Consistency
-    - Isolation
-    - Durability
+    - ACID
+        - Atomicity
+        - Consistency
+        - Isolation
+        - Durability
+    - 병행제어
+        - 로킹
+            - 로킹단위
 - 무결성
     - 개체 무결성
         - PRIMARY KEY
@@ -303,6 +369,12 @@ KEYWORD TREE !
         - 중첩 루프 조인
         - 정렬 병합 조인
         - 해시 조인
+- SQL
+    - DDL
+    - DML
+    - DCL
+    - PL/SQL
+        - 트리거
 
 ## 자료구조
 - 선형 자료구조
@@ -313,6 +385,37 @@ KEYWORD TREE !
 - 비선형 자료구조
     - 그래프
     - 트리
+        - 이진 트리 운행
+            - Preorder
+            - Inorder
+            - Postorder
+            - 수식 표기법
+                - Prefix
+                - Infix
+                - Postfix
     - 힙
     - 우선순위 큐
     - 해시 테이블
+
+## 프로그래밍 패러다임
+- 선언형
+    - 함수형
+- 명령형
+    - 객체지향
+        - 4 특성
+            - 추상화
+                - 인터페이스
+                - 추상클래스
+                - 추상메서드
+            - 상속성
+            - 다형성
+                - 오버라이딩
+                - 오버로딩
+            - 캡슐화
+    - 절차지향
+
+## 프로그래밍 언어
+- Python
+- C/C++
+- Java
+- Javascript
