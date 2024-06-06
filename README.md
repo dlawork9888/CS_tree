@@ -103,15 +103,20 @@ KEYWORD TREE !
                         - 메모리 상태:[ 10KB 사용 | 20KB 빈 공간 | 30KB 사용 | 25KB 빈 공간 | 15KB 사용 | 5KB 빈 공간 ]
                         - 총 빈공간의 크기는 50KB
                         - 하지만 40KB의 연속된 메모리를 요청하는 프로세스는 할당 받을 수 없음
-        - 관리 전략
+        - 주기억장치 관리 전략
             - 반입 전략
-                - 요구 반입
-                - 예상 반입
+                - 주기억장치로 언제 가져올지
+                - 종류
+                    - 요구 반입
+                    - 예상 반입
             - 배치 전략
-                - First Fit
-                - Best Fit 
-                - Worst Fit
+                - 어디에 배치할지
+                - 종류
+                    - First Fit
+                    - Best Fit 
+                    - Worst Fit
             - 교체 전략
+                - 빈 공간 확보를 위해 어느 것을 뺄지
                 - 페이지 교체 알고리즘
                     - OPT
                     - FIFO
@@ -120,6 +125,7 @@ KEYWORD TREE !
                     - NUR
                     - SCR
 - 프로세스
+    - 메모리에 올라간 프로그램
     - PCB
         - 컨텍스트 스위칭
             - 예시
@@ -381,8 +387,11 @@ KEYWORD TREE !
             - UTF-8
     - Session Layer
         - 양 끝단 프로세스 간 세션 관리
+        - TCP/IP 세션을 만들고 없애는 책임
     - Transport Layer
         - End-to-End 간 신뢰성 및 흐름 제어
+        - 상위 계층들이 데이터 전달의 유효성이나 효율성을 생각하지 않도록 해줌
+        - 시퀀스 넘버 기반의 오류 제어 방식
         - 장비
             - Gateway
             - L4 Switch
@@ -396,6 +405,7 @@ KEYWORD TREE !
         - 비연결성, 비신뢰성, 빠르게
         - 장비
             - Router
+                - 서로 다른 네트워크 간의 데이터 패킷을 전달하고 경로를 선택
             - L3 Switch
                 - L2 스위치에 라우팅 기능 추가
         - Protocols
@@ -404,6 +414,7 @@ KEYWORD TREE !
             - Routing Protocols (OSPF, BGP, RIP 등)
     - Data Link Layer
         - Point-to-Point 간 신뢰성
+        - 프레임에 MAC주소를 부여 하고 에러검출,재전송,흐름제어
         - 장비
             - L2 Switch
                 - 일반적으로 부르는 스위치
@@ -411,7 +422,6 @@ KEYWORD TREE !
                 - MAC 주소를 기반으로 프레임 전송
             - Bridge
                 - LAN과 LAN을 연결하거나 LAN안에서 컴퓨터 그룹을 연결
-            - AP
         - Protocols
             - CSMA/CD (Ethernet)
             - CSMA/CA (Wi-Fi)
@@ -457,6 +467,28 @@ KEYWORD TREE !
                         - Secure Socker Layer
                     - TLS
                         - Transport Layer Security
+            - 쿠키와 세션
+                - HTTP는 모든 요청이 독립적
+                    - 현재 접속 사용자가 이전에 접속했던 사용자와 같은지 확인할 길이 없음
+                - 쿠키
+                    - 클라이언트 로컬에 저장되는 키와 값이 들어있는 파일
+                    - 쿠키는 클라이언트 단에 저장됨
+                    - 동작 원리
+                        - 클라이언트가 서버에 요청
+                        - 서버가 상태를 유지하고 싶은 값을 쿠키로 생성
+                        - 서버가 요청에 응답할때 HTTP헤더에 쿠키를 포함해 보냄
+                        - 전달 받은 쿠키를 클라이언트가 관리하고 있다가 다음 요청때 쿠키를 HTTP헤더에 넣어서 전송
+                        - 서버는 쿠키 정보를 읽어서 이전 상태를 확인하고 응답함
+                - 세션
+                    - 일정 시간 동안 같은 클라이언트에서 들어오는 요청을 하나의 상태로 판단, 해당 상태를 유지하는 기술
+                    - 세션 정보는 서버에 저장되어있음
+                    - 동작 원리
+                        - 클라이언트가 서버에 요청
+                        - 서버가 해당 클라리언트에 유일한 Session ID를 부여
+                        - 서버가 응답할 때 HTTP헤더에 Session ID를 포함하여 전송
+                            - 쿠키에 Session ID라는 이름을 저장
+                        - 클라이언트는 Session ID가 담겨있는 쿠키를 HTTP헤더에 넣어서 전송
+                        - 서버가 Session ID를 확인하고 해당 세션에 관련된 정보를 확인하고 응답
         - FTP
             - 파일 전송 프로토콜
             - 기본적으로 TCP 포트 21 이용
@@ -480,23 +512,58 @@ KEYWORD TREE !
     - Transport Layer
         - TCP
             - 신뢰성 보장
-            - 가상 회선 패킷 교환
+            - 연결형 서비스
+            - 패킷 단위의 스트림 전송 기능 제공
+            - 가상 회선 패킷 교환(스트림 교환 방식)
                 - 패킷이 동일한 경로를 따라 전송됨
                 - 순서 보장
+            - 보통 TCP와 IP를 같이 사용
+                - IP가 데이터의 배달을 처리, TCP는 패킷을 추적 및 관리
+            - UDP보다 느림
+            - TCP 흐름 제어
+                - Stop and Wait
+                    - 수신 측의 ACK을 받은 후에 다음 패킷을 전송
+                - Sliding Window
+                    - 수신 측에서 설정한 윈도우 크기만큼 송신 측에서 확인 응답(ACK) 없이 패킷을 전송할 수 있게 하여 데이터 흐름을 동적으로 조절하는 제어 기법
             - 연결 생성 및 해제
                 - 연결 생성
                     - 3 way handshake
-                        - SYN
-                        - SYN + ACK
-                        - ACK
+                        - A: closed, B: listen
+                        - A -> B: "SYN" 
+                            - SYNbit = 1, seq = x
+                        - B: SYN received, A: closed
+                        - B -> A: "SYN + ACK" 
+                            - SYNbit = 1, seq = y
+                            - ACKbit = 1, ACknum = x + 1
+                        - A: established, B: SYN received
+                        - A -> B: "ACK"
+                            - ACKbit = 1, ACKnum = y + 1
                 - 연결 해제
                     - 4 way handshake
-                        - FIN
-                        - ACK
-                        - FIN
-                        - ACK
+                        - A -> B: FIN (FINbit = 1, seq = x)
+                            - A가 이제 다 됐으니까 연결 끊자고 FIN 전송
+                                - A: FIN_WAIT_1
+                            - 더 이상 A가 보낼 수는 없지만 받을 수는 있음
+                        - B -> A: ACK (ACKbit = 1, seq = x + 1)
+                            - B가 알았다고 ACK을 보냄
+                                - B: CLOSE_WAIT
+                                - B는 여전히 데이터를 보낼 수 있음
+                            - ACK을 받은 A는 이제 서버가 닫히길 기다림
+                                - A: FIN_WAIT2
+                        - B -> A: FIN (FINbit = 1, seq = y)
+                            - B가 A에게 FIN을 보냄
+                                - 이제 A에게 ACK이 오길 기다림
+                                - B: LAST_ACK
+                                - B는 이제 더 이상 데이터 못보냄
+                            - FIN을 받은 A
+                        - A -> B: ACK (ACKbit = 1, seqs = y + 1)
+                            - 오케이, A가 B에게 진짜 끝난 거 알았다고 ACK을 보냄
+                            - 하지만 아직 B로부터 받지 못한 데이터가 있을 수 있음
+                                - A: TIMED_WAIT
+                                - TIMED_WAIT은 의도치 않은 데드락으로 빠지는 것을 방지
         - UDP
             - 신뢰성 보장 X
+            - 비연결형 서비스 (-> 데이터그램 방식)
             - 데이터크램 패킷 교환
                 - 패킷이 독립적으로 전송됨
                 - 순서 보장 X
@@ -504,6 +571,8 @@ KEYWORD TREE !
         - QUIC
     - Internet Layer
         - IP
+            - 호스트의 주소지정
+            - 패킷 분할 및 조립 기능
             - IP 주소 체계
                 - 클래스 기반 할당 방식
                 - DHCP
@@ -513,23 +582,36 @@ KEYWORD TREE !
                 - NAT
                     - Network Address Traslation
                     - 하나의 공인 IP 주소를 통해 인터넷에 접속할 수 있도록 해주는 네트워크 기술
-                - IPv4
-                    - 8*4 = 32 bits
-                    - Unicast
-                        - 하나의 송신자가 하나의 수진자에게
-                        - 일대일
-                    - Multicast
-                        - 하나의 송신자가 다수의 수신자에게
-                        - 일대다
-                    - Broadcast
-                        - 하나의 송신자가 동일 네트워크 내의 모든 장치에게
-                        - 일대다
-                - IPv6
-                    - 16*8 = 128 bits
-                    - Unicast
-                    - Multicast
-                    - Anycast
-                        - 하나의 송신자가 최적의 수신자에게
+                - IPv4와 IPv6
+                    - IPv4
+                        - 8*4 = 32 bits 주소
+                        - 가변 길이 헤더
+                            - 최소 20바이트
+                            - 헤더 체크섬 포함
+                        - NAT 사용
+                        - Unicast
+                            - 하나의 송신자가 하나의 수진자에게
+                            - 일대일
+                        - Multicast
+                            - 하나의 송신자가 다수의 수신자에게
+                            - 일대다
+                        - Broadcast
+                            - 하나의 송신자가 동일 네트워크 내의 모든 장치에게
+                            - 일대다
+                    - IPv6
+                        - 16*8 = 128 bits 주소
+                        - 고정 길이 헤더
+                            - 40 바이트
+                        - NAT 사용 안함
+                        - Unicast
+                        - Multicast
+                        - Anycast
+                            - 하나의 송신자가 최적의 수신자에게
+                    - 전환 매커니즘
+                        - 듀얼 스택
+                            - IPv4와 IPv6를 동시에 사용하여 두 프로토콜 간 호환성을 유지
+                        - 터널링
+                            - IPv6 패킷을 IPv4 네트워크를 통해 전송할 수 있도록 캡슐화
             - 홉바이홉 통신
                 - 라우팅 테이블
                     - 네트워크 라우터에 저장된 데이터 구조
@@ -582,6 +664,7 @@ KEYWORD TREE !
     - IGP (Interior Gateway Protocol)
         - AS(Autonomous System, 자율 시스템)내에서 사용되는 라우팅 프로토콜
         - RIP
+            - 거리 벡터 라우팅 프로토콜
             - 소규모 네트워크에서 사용
             - Bellman-Ford 알고리즘
             - 최대 홉수 15
@@ -682,6 +765,11 @@ KEYWORD TREE !
                 - 이를 보장하기 위해 로그 파일이나 백업 등을 사용
     - 병행제어
         - 여러 트랜잭션이 동시에 실행될 때 데이터베이스 일관성을 유지하고 트랜잭션 간의 간섭을 방지
+        - 목적
+            - 시스템 활용도 최대화
+            - 사용자에 대한 응답 시간 최소화
+            - 데이터베이스 공유 최대화
+            - 데이터 베이스 일관성 유지
         - 로킹
             - 데이터 베이스의 특정 자원을 여러 트랜잭션이 동시에 접근하지 못하도록 함
             - 로킹단위
